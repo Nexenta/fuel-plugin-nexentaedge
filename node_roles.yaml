@@ -1,0 +1,50 @@
+nexentaedge-mgmt:
+  name: "NexentaEdge Management"
+  description: "Management node"
+  has_primary: false
+  public_ip_required: false
+  weight: 1000
+  conflicts:
+    - controller
+    - nexentaedge-iscsi-gw
+    - nexentaedge-swift-gw
+    - nexentaedge-data
+  limits:
+    min: 1
+    recomended: 1
+
+nexentaedge-iscsi-gw:
+  name: "NexentaEdge iSCSI Gateway"
+  description: "Gateway iSCSI node"
+  has_primary: false
+  public_ip_required: false
+  weight: 1100
+  conflicts:
+    - controller
+    - nexentaedge-mgmt
+    - nexentaedge-swift-gw
+    - nexentaedge-data
+
+nexentaedge-swift-gw:
+  name: "NexentaEdge Swift Gateway"
+  description: "Gateway Swift node"
+  has_primary: false
+  public_ip_required: false
+  weight: 1200
+  conflicts:
+    - controller
+    - nexentaedge-mgmt
+    - nexentaedge-iscsi-gw
+    - nexentaedge-data
+
+nexentaedge-data:
+  name: "NexentaEdge Data"
+  description: "Data node"
+  has_primary: false
+  public_ip_required: false
+  weight: 1300
+  conflicts:
+    - controller
+    - nexentaedge-mgmt
+    - nexentaedge-iscsi-gw
+    - nexentaedge-swift-gw

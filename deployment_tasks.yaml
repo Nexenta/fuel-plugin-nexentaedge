@@ -1,0 +1,133 @@
+# These tasks will be merged into deployment graph. Here you
+# can specify new tasks for any roles, even built-in ones.
+- id: nexentaedge-mgmt
+  type: group
+  role: [nexentaedge-mgmt]
+  tasks: [hiera, globals, tools, logging, netconfig, hosts, deploy_start]
+  required_for: [deploy_end]
+  requires: [deploy_start]
+  parameters:
+    strategy:
+      type: parallel
+
+- id: nexentaedge-data
+  type: group
+  role: [nexentaedge-data]
+  tasks: [hiera, globals, tools, logging, netconfig, hosts, deploy_start]
+  required_for: [deploy_end]
+  requires: [deploy_start]
+  parameters:
+    strategy:
+      type: parallel
+
+- id: nexentaedge-iscsi-gw
+  type: group
+  role: [nexentaedge-iscsi-gw]
+  tasks: [hiera, globals, tools, logging, netconfig, hosts, deploy_start]
+  required_for: [deploy_end]
+  requires: [deploy_start]
+  parameters:
+    strategy:
+      type: parallel
+
+- id: nexentaedge-swift-gw
+  type: group
+  role: [nexentaedge-swift-gw]
+  tasks: [hiera, globals, tools, logging, netconfig, hosts, deploy_start]
+  required_for: [deploy_end]
+  requires: [deploy_start]
+  parameters:
+    strategy:
+      type: parallel
+
+- id: nexentaedge-predeploy
+  type: puppet
+  groups: [nexentaedge-mgmt, nexentaedge-data, nexentaedge-iscsi-gw, nexentaedge-swift-gw]
+  requires: [deploy_start, hosts]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/predeploy.pp
+    puppet_modules: puppet/modules
+    timeout: 720
+
+- id: nexentaedge-get-neadm
+  type: puppet
+  groups: [nexentaedge-mgmt]
+  requires: [nexentaedge-predeploy]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/get-neadm.pp
+    puppet_modules: puppet/modules
+    timeout: 720
+
+
+- id: nexentaedge-mgmt-deploy
+  type: puppet
+  groups: [nexentaedge-mgmt]
+  requires: [nexentaedge-get-neadm]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/deploy-nexentaedge-mgmt.pp
+    puppet_modules: puppet/modules
+    timeout: 720
+
+- id: nexentaedge-data-deploy
+  type: puppet
+  groups: [nexentaedge-data]
+  requires: [nexentaedge-predeploy]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/deploy-nexentaedge-data.pp
+    puppet_modules: puppet/modules
+    timeout: 720
+
+- id: nexentaedge-iscsi-gw-deploy
+  type: puppet
+  groups: [nexentaedge-iscsi-gw]
+  requires: [nexentaedge-predeploy]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/deploy-nexentaedge-iscsi-gw.pp
+    puppet_modules: puppet/modules
+    timeout: 720
+
+- id: nexentaedge-swift-gw-deploy
+  type: puppet
+  groups: [nexentaedge-swift-gw]
+  requires: [nexentaedge-predeploy]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/deploy-nexentaedge-swift-gw.pp
+    puppet_modules: puppet/modules
+    timeout: 720
+
+- id: nexentaedge-postdeploy
+  type: puppet
+  role: [nexentaedge-mgmt, nexentaedge-data, nexentaedge-iscsi-gw, nexentaedge-swift-gw]
+  requires: [post_deployment_start]
+  required_for: [post_deployment_end]
+  parameters:
+    puppet_manifest: puppet/manifests/postdeploy.pp
+    puppet_modules: puppet/modules
+    timeout: 720
+
+- id: configure-cinder
+  role: [cinder]
+  requires: [post_deployment_start]
+  required_for: [post_deployment_end]
+  type : puppet
+  parameters:
+    puppet_manifest: puppet/manifests/cinder-node-config.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 42
+
+
+# Actions upon 'Deploy changes' button click
+#- id: reconfigure-nedge
+#  role: [nexentaedge-mgmt]
+#  reexecute_on: [deploy_changes]
+#  type : puppet
+#  parameters:
+#    puppet_manifest: puppet/manifests/dummy.pp
+#    puppet_modules: puppet/modules:/etc/puppet/modules
+#    timeout: 42

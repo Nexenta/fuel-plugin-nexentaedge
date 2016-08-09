@@ -1,0 +1,110 @@
+attributes:
+  activation_key:
+    value: ''
+    label: 'Activation key'
+    description: 'Lisence activation key'
+    weight: 20
+    type: "text"
+    regex:
+      source: '^([\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12})$'
+      error: 'Invalid Activation key. Please use a key like XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
+
+  cluster_name:
+    value: 'cl'
+    label: 'Cluster name'
+    weight: 30
+    type: "text"
+    regex:
+      source: '.+'
+      error: "Provide a name for new cluster"
+
+  tenant_name:
+    value: 'tn'
+    label: 'Tenant name'
+    weight: 40
+    type: "text"
+    regex:
+      source: '.+'
+      error: "Provide a name for new tenant"
+
+  bucket_name:
+    value: 'bk'
+    label: 'Bucket name'
+    weight: 50
+    type: "text"
+    regex:
+      source: '.+'
+      error: "Provide a name for new bucket"
+
+  nodocker:
+    value: true
+    label: "No docker"
+    description: "Do not perform docker preparation on server node."
+    weight: 60
+    type: "checkbox"
+
+  profile:
+    type: 'select'
+    weight: 70
+    value: 'capacity'
+    label: 'Profile'
+    description: '.'
+    values:
+      - data: 'capacity'
+        label: 'capacity'
+      - data: 'balanced'
+        label: "balanced"
+      - data: 'performance'
+        label: 'performance'
+
+  use_cinder:
+    value: true
+    label: "Use NEdge as Cinder backend"
+    weight: 80
+    type: "checkbox"
+    restrictions:
+      - condition: "settings:fuel-plugin-nexentaedge.use_iscsi.value == false"
+        action: "hide"
+
+  use_iscsi:
+    value: true
+    label: "Use NEdge as iSCSI backend"
+    weight: 85
+    type: "checkbox"
+
+  iscsi_name:
+    type: "text"
+    value: 'iscsi01'
+    label: 'iSCSI service group name'
+    weight: 90
+    restrictions:
+      - condition: "settings:fuel-plugin-nexentaedge.use_iscsi.value == false"
+        action: "hide"
+    regex:
+      source: '.+'
+      error: "Provide a name for iSCSI service group name"
+
+  use_swift:
+    value: true
+    label: "Use NEdge as Swift backend"
+    weight: 100
+    type: "checkbox"
+
+  swift_name:
+    type: "text"
+    value: "swift01"
+    label: "Swift service group name"
+    weight: 110
+    restrictions:
+      - condition: "settings:fuel-plugin-nexentaedge.use_swift.value == false"
+        action: "hide"
+    regex:
+      source: '.+'
+      error: "Provide a name for Swift service group name"
+
+  replicast_macs:
+    value: ''
+    label: 'Replicast MACs'
+    description: 'Comma-separated MAC addresses list of Replicast network interfaces. One per node.'
+    weight: 120
+    type: "text"

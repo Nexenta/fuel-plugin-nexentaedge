@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Add here any the actions which are required before plugin build
+# like packages building, packages downloading from mirrors and so on.
+# The script should return 0 if there were no errors.
+
+set -eux
+
+ROOT="$(dirname `readlink -f $0`)"
+DIST="${ROOT}/deployment_scripts/python/dist/"
+
+#curl -L -u da158e598aab4ca918fb1d7db54eb60323e1da97:x-oauth-basic https://github.com/Nexenta/JujuCharm/archive/master.zip > "${DIST}nexentaedge.zip"
+#unzip -o "${DIST}nexentaedge.zip" -d "${DIST}"
+#rm "${DIST}nexentaedge.zip"
+
+#wget https://bootstrap.pypa.io/get-pip.py -O "${DIST}get-pip.py"
+
+rm -rf "${DIST}JujuCharm-master"
+cp -rf /home/alex/nexenta/JujuCharm "${DIST}JujuCharm-master"
+rm -rf "${DIST}JujuCharm-master/.git"
