@@ -21,7 +21,6 @@ class NeadmInitWait(BaseConfigurationStep):
                 print("SUCCEDED!\n")
                 nodes = status.get_nedge_nodes()
                 print(nodes)
-                time.sleep(60)
                 return
             print("Return code is {0}\nOutput is:{1}".format(status.exit_code,
                                                              status.output))

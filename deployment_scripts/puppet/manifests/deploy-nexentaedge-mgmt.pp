@@ -1,6 +1,5 @@
 include nexentaedge
 
-$settings = hiera("fuel-plugin-nexentaedge")
 exec { 'deploy management node':
   cwd => "${nexentaedge::root_path}python/modules",
   logoutput => true,

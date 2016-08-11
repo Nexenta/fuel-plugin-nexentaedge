@@ -40,6 +40,10 @@ package { 'netifaces':
   ensure => present,
   provider => 'pip'
 } ->
+package { 'requests':
+  ensure => present,
+  provider => 'pip'
+} ->
 exec { 'get nedeploy':
   cwd => "${nexentaedge::root_path}python/modules",
   logoutput => true,

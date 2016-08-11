@@ -1,6 +1,6 @@
 import ConfigParser
 import subprocess
-from utils import get_deployment_config
+from utils import get_deployment_config, download
 
 CINDER_PATH = '/etc/cinder/cinder.conf'
 
@@ -17,6 +17,21 @@ def main():
     cfg = get_deployment_config()
     plugin = cfg['fuel-plugin-nexentaedge']
     if plugin['use_cinder']:
+
+        # getting the driver from Nexenta repo if its version is in the list
+        branches = ('liberty', 'mitaka')
+        version = filter(lambda branch: branch in cfg['openstack_version'], branches)
+        if version:
+            version = version[0]
+            branch = 'stable/' + version
+            url_prefix = 'https://raw.githubusercontent.com/Nexenta/cinder/{}/cinder/volume/drivers/nexenta'.format(branch)
+            local_path = '/usr/lib/python2.7/dist-packages/cinder/volume/drivers/nexenta'
+            filenames = ['nexentaedge/iscsi.py', 'nexentaedge/jsonrpc.py', 'nexentaedge/__init__.py', 'options.py', 'utils.py']
+            for name in filenames:
+                download(
+                    '/'.join((url_prefix, name)),
+                    '/'.join((local_path, name)))
+
         nodes = cfg['nodes']
 
         config = ConfigParser.RawConfigParser()
@@ -66,6 +81,9 @@ def main():
 
         config.set('DEFAULT', 'enabled_backends', ','.join(enabled_backends))
         config.set('DEFAULT', 'default_volume_type', volume_backend_name)
+
+        # Fuel bug workaround.
+        config.remove_option('DEFAULT', 'verbose')
 
         with open(CINDER_PATH, 'w') as f:
             config.write(f)

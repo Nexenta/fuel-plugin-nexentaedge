@@ -58,23 +58,23 @@ class SystemPreConfig(BaseConfigurationStep):
         p.save()
 
         # Only for Fuel
-        path = '/etc/network/interfaces.d/ifcfg-' + interface_name
-        if os.path.exists(path):
-            os.remove(path)
-        repl_parser = IfaceParser(path)
-        block = AutoBlock()
-        block.ifaces.append(interface_name)
-        repl_parser.blocks.append(block)
+        #path = '/etc/network/interfaces.d/ifcfg-' + interface_name
+        #if os.path.exists(path):
+        #    os.remove(path)
+        #repl_parser = IfaceParser(path)
+        #block = AutoBlock()
+        #block.ifaces.append(interface_name)
+        #repl_parser.blocks.append(block)
 
-        block = IfaceBlock()
-        block.name = interface_name
-        block.address_type = 'inet'
-        block.service_type = 'static'
-        block.params['address'] = '0.0.0.0'
-        block.params['mtu'] = '9000'
-        block.params['netmask'] = '255.255.255.0'
-        repl_parser.blocks.append(block)
-        repl_parser.save()
+        #block = IfaceBlock()
+        #block.name = interface_name
+        #block.address_type = 'inet'
+        #block.service_type = 'static'
+        #block.params['address'] = '0.0.0.0'
+        #block.params['mtu'] = '9000'
+        #block.params['netmask'] = '255.255.255.0'
+        #repl_parser.blocks.append(block)
+        #repl_parser.save()
 
 
         # restart the interface
