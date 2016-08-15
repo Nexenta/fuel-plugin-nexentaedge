@@ -18,7 +18,7 @@ def main():
         'node_private_ip': '127.0.0.1',
         'replicast_eth': replicast_name,
         'profile': plugin['profile'],
-        'nodocker': plugin['nodocker'],
+        'nodocker': True,
         'exclude': None,
         'reserved': None
     }

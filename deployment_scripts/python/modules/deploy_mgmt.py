@@ -23,7 +23,7 @@ def main():
         'nedge_tenant_name': plugin['tenant_name'],
         'nedge_bucket_name': plugin['bucket_name'],
         'profile': plugin['profile'],
-        'nodocker': plugin['nodocker'],
+        'nodocker': True,
         'exclude': None,
         'reserved': None
     }

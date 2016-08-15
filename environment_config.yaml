@@ -36,12 +36,12 @@ attributes:
       source: '.+'
       error: "Provide a name for new bucket"
 
-  nodocker:
-    value: true
-    label: "No docker"
-    description: "Do not perform docker preparation on server node."
-    weight: 60
-    type: "checkbox"
+#  nodocker:
+#    value: true
+#    label: "No docker"
+#    description: "Do not perform docker preparation on server node."
+#    weight: 60
+#    type: "checkbox"
 
   profile:
     type: 'select'
@@ -59,7 +59,7 @@ attributes:
 
   use_cinder:
     value: true
-    label: "Use NEdge as Cinder backend"
+    label: "Configure Cinder"
     weight: 80
     type: "checkbox"
     restrictions:
@@ -68,7 +68,7 @@ attributes:
 
   use_iscsi:
     value: true
-    label: "Use NEdge as iSCSI backend"
+    label: "Configure NEdge as iSCSI backend"
     weight: 85
     type: "checkbox"
 
@@ -86,7 +86,7 @@ attributes:
 
   use_swift:
     value: true
-    label: "Use NEdge as Swift backend"
+    label: "Configure NEdge as Swift backend"
     weight: 100
     type: "checkbox"
 
@@ -108,3 +108,6 @@ attributes:
     description: 'Comma-separated MAC addresses list of Replicast network interfaces. One per node.'
     weight: 120
     type: "text"
+    regex:
+      source: '.+'
+      error: "Provide MAC adresses list"

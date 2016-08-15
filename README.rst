@@ -1,7 +1,14 @@
 =====================================
 Fuel Plugin for NexentaEdge 1.1.0 FP3
 =====================================
-The plugin facilitates to deploy NexentaEdge cluster, configure it and configure cinder through cinder.conf if required.
+This plugin facilitiates the deployment and intitialization of NexentaEdge cluster, configuration of Cinder and Swift backends, deployment of Cinder Volume Driver and it's configuration.
+
+:Version: 1.0
+:MOS Fuel Version: 9.0
+:Openstack Version: Mitaka
+:NexentaEdge Version: 1.1.0 FP3
+
+This document provides instructions for deploying, configuring, troubleshooting and using the NexentaEdge Plugin for Fuel 9.0.
 
 ------------
 Requirements
@@ -20,13 +27,18 @@ Limitations
 * No S3 Support
 
 ---------
+Licensing
+---------
+To deploy NexentaEdge cluster using fuel plugin, once must provide a license activation token for NexentaEdge. The token can be requested from `sales@nexenta.com <mailto://sales@nexenta.com>`_. This token has to be specified under Settings "Other".
+
+---------
 Deploying
 ---------
-'1 Download .rpm file (e.g. fuel-plugin-nexentaedge-1.0-1.0.0-1.noarch.rpm) from repo onto your Fuel master node
-'2 Exxecute fuel plugins --install fuel-plugin-nexentaedge-1.0-1.0.0-1.noarch.rpm
-3 Create an envronment in your Fuel dashboard, enable the plugin in "Settings -> Other" the section and configure it. You must specify lisence activation key. It will be applied on management node. Also you must specify MAC addresses of Replicast interfaces for each node. You can find description of these options and other ones in "Settings -> Other" section.
-4 Add nodes. The cluster must have the only management node.
-5 Configure nodes. Each node must have at least 4 unlocated physical disks. Click Disk Configuration button and mark the appropriate disks as unallocated
+1. Download .rpm file (e.g. fuel-plugin-nexentaedge-1.0-1.0.0-1.noarch.rpm) from repo onto your Fuel master node
+2. Exxecute fuel plugins --install fuel-plugin-nexentaedge-1.0-1.0.0-1.noarch.rpm
+3. Create an envronment in your Fuel dashboard, enable the plugin in "Settings -> Other" the section and configure it. You must specify lisence activation key. It will be applied on management node. Also you must specify MAC addresses of Replicast interfaces for each node. You can find description of these options and other ones in "Settings -> Other" section.
+4. Add nodes. The cluster must have the only management node.
+5. Configure nodes. Each node must have at least 4 unlocated physical disks. Click Disk Configuration button and mark the appropriate disks as unallocated
 
 ------------
 How it works
@@ -38,10 +50,10 @@ To add new node you need to do everything as usually and click 'Deploy Changes' 
 ---------------
 Troubleshooting
 ---------------
-If the clusster is deployed but something is not working, log in to Fuel master node, execute
+If the cluster is deployed but something is not working, login to Fuel master node, execute
     fuel nodes
 
-Find the NexentaEdge mgmt address and log in to it by executing
+Find the NexentaEdge mgmt address and login to it by executing
     ssh <mgmt_address>, where mgmt_address is an address of mgmt node from the table
 
 Execute on mgmt node
@@ -54,5 +66,4 @@ To use NexentaEdge CLI just execute
 
 and get help for how to use it.
 
-NexentaEdge documentation link_.
-.. _link http://docs.nexenta.com/NexentaRH/server?%26area%3Dnedge_1.1%26mgr%3Dagm%26agt%3Dwsm%26wnd%3Dnedge_UG%7CNewWindow%26tpc%3D%2FNexentaRH%2FNexentaRH%2Fserver%2Fnedge_1.1%2Fprojects%2Fnedge_UG%2FNexentaEdge_Documentation.htm%3FRINoLog28301%3DT%26ctxid%3D%26project%3Dnedge_UG
+NexentaEdge documentation `link <http://docs.nexenta.com/NexentaRH/server?%26area%3Dnedge_1.1%26mgr%3Dagm%26agt%3Dwsm%26wnd%3Dnedge_UG%7CNewWindow%26tpc%3D%2FNexentaRH%2FNexentaRH%2Fserver%2Fnedge_1.1%2Fprojects%2Fnedge_UG%2FNexentaEdge_Documentation.htm%3FRINoLog28301%3DT%26ctxid%3D%26project%3Dnedge_UG>`_.
