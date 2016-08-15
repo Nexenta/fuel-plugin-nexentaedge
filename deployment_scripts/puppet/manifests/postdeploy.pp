@@ -8,11 +8,6 @@ exec { 'Delete standard ubuntu trusty apt list':
   path => "/bin"
 } ->
 
-#exec { 'Restore iface config':
-#  command => "mv -f /etc/network/interfaces.nedge-backup /etc/network/interfaces 2>/dev/null || true",
-#  path => "/bin"
-#} ->
-
 exec { 'Delete force_confdef':
   command => "rm /etc/apt/apt.conf.d/force_confdef 2>/dev/null || true",
   path => "/bin"

@@ -45,7 +45,9 @@ def download(url, path):
                     attempts += 1
                     time.sleep(5)
                     continue
-                msg = 'An error occured while trying to download file at {}. Code: {}, Reason: {}'.format(url, r.status_code, r.reason)
+                msg = 'An error occured while trying to download file at ' \
+                      '{}. Code: {}, Reason: {}'.format(
+                       url, r.status_code, r.reason)
                 raise requests.HTTPError(msg)
         finally:
             r.close()

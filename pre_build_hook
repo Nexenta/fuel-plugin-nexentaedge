@@ -13,8 +13,6 @@ DIST="${ROOT}/deployment_scripts/python/dist/"
 #unzip -o "${DIST}nexentaedge.zip" -d "${DIST}"
 #rm "${DIST}nexentaedge.zip"
 
-#wget https://bootstrap.pypa.io/get-pip.py -O "${DIST}get-pip.py"
-
 rm -rf "${DIST}JujuCharm-master"
 cp -rf /home/alex/nexenta/JujuCharm "${DIST}JujuCharm-master"
 rm -rf "${DIST}JujuCharm-master/.git"

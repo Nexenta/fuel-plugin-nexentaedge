@@ -1,5 +1,3 @@
-include nexentaedge
-
 exec { 'Backup Fuel apt list':
   command => "mv /etc/apt/sources.list.d/fuel-plugin-nexentaedge-1.0.0.list /etc/apt/sources.list.d/fuel-plugin-nexentaedge-1.0.0.list.nedge-backup 2>/dev/null || true",
   path => "/bin"
@@ -33,7 +31,7 @@ package { "python-pip":
 # install python libs
 exec { "install nexentaedghe lib":
   command => "python ./setup.py install",
-  cwd => "${nexentaedge::root_path}python/dist/JujuCharm-master",
+  cwd => "python/dist/JujuCharm-master",
   path => "/usr/bin"
 } ->
 package { 'netifaces':
@@ -45,7 +43,7 @@ package { 'requests':
   provider => 'pip'
 } ->
 exec { 'get nedeploy':
-  cwd => "${nexentaedge::root_path}python/modules",
+  cwd => "python/modules",
   logoutput => true,
   command => "python get_nedeploy.py",
   path => "/usr/bin"

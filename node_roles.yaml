@@ -6,6 +6,8 @@ nexentaedge-mgmt:
   weight: 1000
   conflicts:
     - controller
+    - compute
+    - cinder
     - nexentaedge-iscsi-gw
     - nexentaedge-swift-gw
     - nexentaedge-data
@@ -21,6 +23,8 @@ nexentaedge-iscsi-gw:
   weight: 1100
   conflicts:
     - controller
+    - compute
+    - cinder
     - nexentaedge-mgmt
     - nexentaedge-swift-gw
     - nexentaedge-data
@@ -33,6 +37,8 @@ nexentaedge-swift-gw:
   weight: 1200
   conflicts:
     - controller
+    - compute
+    - cinder
     - nexentaedge-mgmt
     - nexentaedge-iscsi-gw
     - nexentaedge-data
@@ -45,6 +51,8 @@ nexentaedge-data:
   weight: 1300
   conflicts:
     - controller
+    - compute
+    - cinder
     - nexentaedge-mgmt
     - nexentaedge-iscsi-gw
     - nexentaedge-swift-gw

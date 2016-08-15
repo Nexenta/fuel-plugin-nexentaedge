@@ -6,7 +6,7 @@ from utils import get_deployment_config
 
 
 def main():
-    #check nedge already installed and ready
+    # check nedge already installed and ready
     if get_sid():
         return
 

@@ -120,14 +120,3 @@
     puppet_manifest: puppet/manifests/cinder-node-config.pp
     puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 42
-
-
-# Actions upon 'Deploy changes' button click
-#- id: reconfigure-nedge
-#  role: [nexentaedge-mgmt]
-#  reexecute_on: [deploy_changes]
-#  type : puppet
-#  parameters:
-#    puppet_manifest: puppet/manifests/dummy.pp
-#    puppet_modules: puppet/modules:/etc/puppet/modules
-#    timeout: 42
