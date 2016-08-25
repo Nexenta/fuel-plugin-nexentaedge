@@ -17,16 +17,16 @@ troubleshooting and using the NexentaEdge Plugin for Fuel 9.0.
 Requirements
 ------------
 * Dedicated Replicast Network is required (10GBE is recommended). The Replicast
-network must be on a separate VLAN, or be a physically separate network. Each
-node will have a dedicated interfaces for Replicast. It will use IPv6 subnet
-that has no ingress or egress routes. Replicast network requires jumbo frames
-to be enabled (9000 MTU)
+  network must be on a separate VLAN, or be a physically separate network. Each
+  node will have a dedicated interfaces for Replicast. It will use IPv6 subnet
+  that has no ingress or egress routes. Replicast network requires jumbo frames
+  to be enabled (9000 MTU)
 * Each Data Node requires 4 drives + system drive (SSD is optional)
 * 64 bit architecture with a CPU that supports SSE4.2 (full SIMD instruction
-set extension), 4 cores
+  set extension), 4 cores
 * 16GB RAM per data node, and 48GB per gateway node. If a node will function
-both as a data node and gateway node, Nexenta recommends at least 64GB RAM
-* See info in Prerequisites section of Installation Guide  (`link <http://docs.nexenta.com/NexentaRH/server?%26area%3Dnedge_1.1%26mgr%3Dagm%26agt%3Dwsm%26wnd%3Dnedge_UG%7CNewWindow%26tpc%3D%2FNexentaRH%2FNexentaRH%2Fserver%2Fnedge_1.1%2Fprojects%2Fnedge_UG%2FNexentaEdge_Documentation.htm%3FRINoLog28301%3DT%26ctxid%3D%26project%3Dnedge_UG>`_.)
+  both as a data node and gateway node, Nexenta recommends at least 64GB RAM
+* See info in Prerequisites section of Installation Guide  (`link <http://docs.nexenta.com/NexentaRH/server?%26area%3Dnedge_1.1%26mgr%3Dagm%26agt%3Dwsm%26wnd%3Dnedge_UG%7CNewWindow%26tpc%3D%2FNexentaRH%2FNexentaRH%2Fserver%2Fnedge_1.1%2Fprojects%2Fnedge_UG%2FNexentaEdge_Documentation.htm%3FRINoLog28301%3DT%26ctxid%3D%26project%3Dnedge_UG>`_)
 
 ----------------
 Product Features
@@ -53,20 +53,20 @@ specified under Settings "Other".
 Deploying
 ---------
 1. Download .rpm file (e.g. fuel-plugin-nexentaedge-1.0-1.0.0-1.noarch.rpm)
-from repo onto your Fuel master node
+   from repo onto your Fuel master node
 2. Exxecute fuel plugins --install fuel-plugin-nexentaedge-1.0-1.0.0-1.noarch.rpm
 3. Create an envronment in your Fuel dashboard, enable the plugin in
-"Settings -> Other" section and configure it. You must specify license
-activation key. It will be applied on management node. Also you must specify
-MAC addresses of Replicast interfaces for each node. You can find description
-of these and other options in "Settings -> Other" section.
+   "Settings -> Other" section and configure it. You must specify license
+   activation key. It will be applied on management node. Also you must specify
+   MAC addresses of Replicast interfaces for each node. You can find description
+   of these and other options in "Settings -> Other" section.
 4. Add nodes. The cluster must have the only management node.
 5. Configure nodes. Each node must have at least 4 unallocated physical disks.
-Click Disk Configuration button and mark the appropriate disks as unallocated.
+   Click Disk Configuration button and mark the appropriate disks as unallocated.
 6. Click "Deploy Changes" in the Dashboard tab.
 7. If a cluster was deployed without errors, you can start using it through
-Horizon. For more precise adjustment of Nedge cluster use Nedge CLI on Nedge
-management node. See Troubleshooting section to know how to do that.
+   Horizon. For more precise adjustment of Nedge cluster use Nedge CLI on Nedge
+   management node. See Troubleshooting section to know how to do that.
 8. Enjoy :-)
 
 ------------
@@ -89,8 +89,7 @@ swift service groups and cinder.conf.
 ---------------
 Troubleshooting
 ---------------
-If the cluster is deployed but something is not working, login to Fuel master
-node, execute
+If the cluster is deployed but something is not working, login to Fuel master node, execute
     fuel nodes
 
 Find the NexentaEdge mgmt address and login to it by executing
