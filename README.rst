@@ -114,7 +114,9 @@ and get help for how to use it.
 In the case Fuel is deployed on top of vCenter VMs you must set
 'Promiscuous Mode' option to 'Accept' (Default is "Reject) on all of the
 vSwitches.
+
 Instructions for vSphere Client:
+
 1. Select an ESXi host
 2. Navigate to to 'Configuration' tab -> 'Networking'.
 3. Click on switch 'Properties'
