@@ -111,4 +111,16 @@ To use NexentaEdge CLI just execute
 
 and get help for how to use it.
 
+In the case Fuel is deployed on top of vCenter VMs you must set
+'Promiscuous Mode' option to 'Accept' (Default is "Reject) on all of the
+vSwitches.
+Instructions for vSphere Client:
+1. Select an ESXi host
+2. Navigate to to 'Configuration' tab -> 'Networking'.
+3. Click on switch 'Properties'
+4. Select vSwitch and click 'Edit' button.
+5. Go to 'Security' tab -> 'Policy Exceptions' group and set all options to
+   'Accept'
+6. Repeat for all vSwitches
+
 NexentaEdge documentation `link <http://docs.nexenta.com/NexentaRH/server?%26area%3Dnedge_1.1%26mgr%3Dagm%26agt%3Dwsm%26wnd%3Dnedge_UG%7CNewWindow%26tpc%3D%2FNexentaRH%2FNexentaRH%2Fserver%2Fnedge_1.1%2Fprojects%2Fnedge_UG%2FNexentaEdge_Documentation.htm%3FRINoLog28301%3DT%26ctxid%3D%26project%3Dnedge_UG>`_.
