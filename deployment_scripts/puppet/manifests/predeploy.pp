@@ -30,8 +30,8 @@ package { "python-pip":
 
 # install python libs
 exec { "install nexentaedghe lib":
-  command => "python ./setup.py install",
-  cwd => "python/dist/JujuCharm-master",
+  cwd => "/etc/fuel/plugins/fuel-plugin-nexentaedge-1.0/python/dist/JujuCharm-master",
+  command => "python setup.py install",
   path => "/usr/bin"
 } ->
 package { 'netifaces':
@@ -43,8 +43,7 @@ package { 'requests':
   provider => 'pip'
 } ->
 exec { 'get nedeploy':
-  cwd => "python/modules",
   logoutput => true,
-  command => "python get_nedeploy.py",
+  command => "python python/modules/get_nedeploy.py",
   path => "/usr/bin"
 }
